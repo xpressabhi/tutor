@@ -171,6 +171,39 @@ state machine, a worked example, anatomy — gets one self-contained HTML file i
 Filenames carry the rung (`control-flow-r4.html`) so a later session can regenerate
 the same concept at a different rung.
 
+## Source grounding
+
+Added after reading [bevibing/tutor-skills](https://github.com/bevibing/tutor-skills)
+— a sibling skill with a different architecture, not a fork of this one.
+
+The hole it fills: this skill's knowledge otherwise comes from the model, so a
+factually wrong claim is indistinguishable from a right one. Code execution
+closes that gap for claims *about code* — you run it, so you know. It does
+nothing for claims about the world.
+
+The borrowed idea is generation: when the learner has material, read it and write
+per-concept notes carrying where each fact came from. Then a question can name its
+source, and an ungrounded question can be labelled as such. Two claims with the
+same confidence level stop looking identical, which is the whole point.
+
+What was not taken:
+
+- **Obsidian.** A viewer, not a mechanism — and Obsidian opens any folder as a
+  vault, so `~/tutor/<topic>/` is browsable that way with zero skill changes and no
+  dependency. The learning happens in the dialogue; the notes are the residue.
+- **The 9-phase vault pipeline.** This skill is one loop. A generator feeding a
+  quizzer is a different shape, and adopting the phases would add a second skill and
+  a second failure mode for no gain in the loop itself.
+- **Their proficiency model.** Percentage-of-correct over batches of four MCQ. It
+  cannot see whether an answer was reasoned or guessed, so the ratchet guard and
+  regression detection both become unavailable. A one-question loop can.
+
+Their batch cadence is the deeper difference: four questions land before any
+adaptation happens, so within a round the tutor cannot respond to the learner. That
+is why the two skills are complementary rather than competing — theirs is strong
+for working through a vault of your own documents, this one for a subject learned
+over time.
+
 ## Tailoring
 
 The learner's method is observed, not assigned. Signals read in the first session
@@ -261,3 +294,38 @@ If the steering turned out to be the better use of the session — the thing the
 actually care about is a prerequisite for the concept on the ledger — the ledger is
 reordered to put it first. The mission is theirs; chasing their curiosity is how
 motivation stays intact. Record the reordering in the log.
+
+## Harness portability
+
+Plain prose over plain files. No tool names, no vendor API, no assumption that a
+particular agent runtime is present — so the skill loads in OpenCode, Claude Code,
+Cursor, or anything else that reads `SKILL.md`.
+
+Three places where harnesses genuinely differ, each handled by degrading rather
+than failing:
+
+- **No execution.** Sandboxed or read-only skill directory, no shell, an agent that
+  cannot run code: ask the learner to run it and read the output back. If that is
+  impossible too, say the output is unverified. Predicting it would reintroduce
+  exactly the ungrounded claim source-grounding exists to remove.
+- **No file opening.** Some environments cannot surface an HTML artifact. Print the
+  path, or carry the idea in prose that turn.
+- **No writable filesystem.** The loop still runs in-session; it simply cannot
+  resume. Say so rather than implying state is being kept.
+
+Frontmatter carries only `name` and `description`, the two portable keys.
+Harness-specific keys (`disable-model-invocation`, `argument-hint`, `allowed-tools`)
+change how the skill is reached, not what it does.
+
+## Scope
+
+Deliberately not built:
+
+- No spaced repetition scheduler. Revisiting shaky concepts is opportunistic,
+  driven by what the loop encounters. A proper SRS needs per-concept decay intervals
+  and a due queue — worth it once sessions are weeks apart, not on day one.
+- No curriculum. Concepts accumulate as encountered; the outline exists so the
+  learner can see coverage, not to constrain it.
+- No vault generator. Source notes are written for the concepts the learner's own
+  material happens to cover, in one pass. Structured generation as its own pipeline
+  is a different skill.

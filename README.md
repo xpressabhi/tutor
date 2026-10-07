@@ -58,9 +58,20 @@ Slugify the topic and the skill creates `~/tutor/<topic>/` on first use.
 | **Steers** | Tangents are followed, then re-anchored. Wandering isn't being behind |
 | **Runs code** | Verifies the learner's snippets against real output; builds questions whose answers were actually observed |
 | **Draws** | Emits level-tagged HTML artifacts for concepts that need to be seen, at the learner's rung, not the maximal version |
+| **Grounds** | If you have material — docs, a codebase, a book — questions come from it and cite it. No material means it says when it's unsure |
 
 Technical and non-technical subjects both. Code execution is opt-in by context —
 a non-technical subject never triggers it.
+
+## Harness portability
+
+Plain markdown files, plain prose instructions, no vendor API. Loads in OpenCode,
+Claude Code, Cursor, or anything else that reads `SKILL.md`.
+
+Optional capabilities degrade rather than fail. No shell? The learner runs the code
+and reads the output back. No way to open a file? The idea comes through in prose.
+No writable filesystem? The session still works, it just can't resume — and the
+skill says so instead of pretending.
 
 ## Workspace
 
@@ -70,6 +81,7 @@ Everything is plain markdown you can read, edit, and diff:
 ~/tutor/python/
   TOPIC.md          # mission, outline, learner profile
   LEDGER.md         # per-concept rung and verdict — read before every question
+  sources/          # only if you have material to ground in
   sessions/
     2026-10-07.md   # append-only history
   artifacts/
@@ -79,13 +91,15 @@ Everything is plain markdown you can read, edit, and diff:
 ## Design
 
 `DESIGN.md` covers the reasoning: why verdicts read the *how*, why the rung
-ratchet is guarded, why no learning-style taxonomy. `FORMATS.md` has the file
-templates.
+ratchet is guarded, why no learning-style taxonomy, and what was borrowed from
+[bevibing/tutor-skills](https://github.com/bevibing/tutor-skills) (source grounding
+— not Obsidian, not the vault pipeline). `FORMATS.md` has the file templates.
 
-Two deliberate omissions:
+Deliberate omissions:
 
 - **No spaced-repetition scheduler.** Shaky concepts get revisited opportunistically. A proper SRS needs per-concept decay intervals and a due queue — worth it once sessions are weeks apart, not on day one.
-- **No source citations.** Code execution makes factual claims *about code* verifiable; claims about the world still come from the model, which says so when it's unsure.
+- **No Obsidian dependency.** Obsidian opens any folder as a vault, so `~/tutor/<topic>/` is browsable that way already if you want it. The skill doesn't impose a structure on a third-party app.
+- **No vault generator.** Source notes are written in one pass for the concepts your material actually covers. Structured generation as its own pipeline is a separate skill.
 
 ## Layout
 

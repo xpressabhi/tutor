@@ -13,13 +13,15 @@ Check `~/tutor/<topic>/TOPIC.md`. If it does not exist, this is a first session 
 
 ## First session
 
-Three things before the first question, in this order. Do not skip to questions — the answers below are what tune every question after.
+Four things before the first question, in this order. Do not skip to questions — the answers below are what tune every question after.
 
 **1. Mission.** Ask what they want it for. The underlying outcome, not the topic: "ship a Flask API at work", "beat my colleague at club chess", "read medieval history for pleasure". If the answer is vague ("get better at Python"), interview once more, then propose a concrete phrasing and confirm it. A bad mission makes every later question feel irrelevant.
 
-**2. Where they are.** A short calibration, not a placement test. Three or four questions across the subject at increasing difficulty, spanning basics to somewhere past the middle. Read the level of the answers — the ceiling, not the average. Someone who aces three and stumbles on the fourth starts above their average, not at it. Three or four questions is the budget; the loop calibrates itself from here.
+**2. Sources — ask once, skip if no.** "Do you have material for this — a folder of docs, a codebase, a course, a book?" If yes, ground the topic in it: read the material and write source notes to `~/tutor/<topic>/sources/`, then ask questions from those notes and cite where each came from. If no, questions come from your own knowledge and you say so when you are unsure — record `Sources: none` in `TOPIC.md` and move on. Do not invent a source-grounded path for subjects that have no material; this branch is for when material exists. Note format: [FORMATS.md](FORMATS.md#sources).
 
-**3. How they learn.** Ask what worked when they learned something before, and what did not. Pace, whether they want a hint or the correction outright, whether they prefer to work something out or be shown. Write what they say into `TOPIC.md`. Do not apply a learning-style taxonomy; record what they actually tell you and what the calibration reveals.
+**3. Where they are.** A short calibration, not a placement test. Three or four questions across the subject at increasing difficulty, spanning basics to somewhere past the middle. Read the level of the answers — the ceiling, not the average. Someone who aces three and stumbles on the fourth starts above their average, not at it. Three or four questions is the budget; the loop calibrates itself from here.
+
+**4. How they learn.** Ask what worked when they learned something before, and what did not. Pace, whether they want a hint or the correction outright, whether they prefer to work something out or be shown. Write what they say into `TOPIC.md`. Do not apply a learning-style taxonomy; record what they actually tell you and what the calibration reveals.
 
 Then create the workspace, seed `LEDGER.md` from the calibration, and start the loop.
 
@@ -68,17 +70,27 @@ Only `correct` moves the rung up. A correct answer for the wrong reason is a gue
 
 **Shaky concepts get revisited.** That is what the log earns.
 
+## Grounded questions
+
+When a concept has a source note, ask from it rather than from memory, and name the source with the question: "the docs say…". Two things follow. The answer is checkable — you can point at where it came from instead of asserting it. And the learner can go read it, which is where real understanding consolidates.
+
+When a concept has **no** source note, it comes from your knowledge. Say so, plainly, and say when you are unsure. An ungrounded question presented with the same confidence as a grounded one is how a learner ends up confidently holding something wrong.
+
+Reading code counts as a source. For a technical topic with a codebase, the code is the ground truth — read it, run it, and ask about what it actually does.
+
 ## Code execution
 
-For technical subjects, run code through `scripts/run.sh` — `echo 'code' | bash scripts/run.sh python3`. Three uses: verifying the learner's pasted code against real output, producing the answer when the question is "what does this print", and generating questions from scaffolding whose output you have actually observed. The third matters most — it is what makes an expected answer certain instead of assumed.
+For technical subjects, run code through `scripts/run.sh` (in this skill's directory) — pipe the snippet in on stdin, pass the interpreter as the argument, optionally a timeout in seconds: `echo 'code' | run.sh python3`. Three uses: verifying the learner's pasted code against real output, producing the answer when the question is "what does this print", and generating questions from scaffolding whose output you have actually observed. The third matters most — it is what makes an expected answer certain instead of assumed.
 
 Non-technical subjects never trigger this. It activates on being asked for code, being given code, or any question whose answer is a program's output.
 
-The script enforces timeout, temp-file cleanup, stdout/stderr/exit capture, and no install or network. If the interpreter is missing, say so and ask them to run it and paste the output. Run code to check facts about code; never run it to decide what to teach, and never execute something the learner cannot see.
+The script enforces timeout, temp-file cleanup, stdout/stderr/exit capture, and no install or network.
+
+If `scripts/run.sh` is unavailable — sandboxed read-only skill directory, no shell, an agent that cannot execute — run the snippet the way the environment allows and get the output back to the learner to read. If neither is possible, say the output is unverified rather than predicting it. Fall back to what works; never abandon the loop over tooling.
 
 ## Artifacts
 
-When a concept genuinely needs to be *seen* — control flow, a comparison table, a state machine, a worked example, anatomy — write one self-contained HTML file to `~/tutor/<topic>/artifacts/` and open it.
+When a concept genuinely needs to be *seen* — control flow, a comparison table, a state machine, a worked example, anatomy — write one self-contained HTML file to `~/tutor/<topic>/artifacts/` and get it in front of the learner: open it if the environment can, otherwise print the path so they can open it themselves. A diagram nobody sees teaches nothing, so if you cannot show it, put the idea in prose that turn instead.
 
 - **At their rung.** The same diagram for a rung-2 learner labels the parts and traces one path; for a rung-4 learner it adds what breaks at the boundaries. Never the maximal version.
 - **Bounded.** One idea, screen or two. If it needs scrolling to see the point, it is two artifacts.
@@ -106,3 +118,13 @@ Full file formats and the templates to create them: [FORMATS.md](FORMATS.md).
 Design rationale and scope decisions: [DESIGN.md](DESIGN.md).
 
 Write the ledger row and the session log entry **before** asking the next question. State kept in your head is state that a clean context loses.
+
+## Harness portability
+
+Everything above is plain prose over plain files — no tool names, no vendor API, nothing that assumes a particular agent runtime. Where a capability is optional (executing code, opening a file), the skill says what to do without it rather than assuming it exists.
+
+Three conventions worth knowing about, since not every harness behaves the same:
+
+- **Skill directory paths.** `scripts/run.sh` is relative to wherever this skill lives. Resolve it against the skill's own directory, not the learner's working directory.
+- **Filesystem access.** The skill needs read and write on `~/tutor/`. If it cannot write there, the loop still works in-session — it just cannot resume. Say that plainly rather than pretending state is being kept.
+- **Frontmatter.** `name` and `description` are the portable keys. Harnesses that support extra keys (`disable-model-invocation`, `argument-hint`, `allowed-tools`) may use them; the skill behaves the same without them, it just becomes always-loaded rather than invoked by name.
