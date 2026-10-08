@@ -49,7 +49,7 @@ readers), `~/.claude/skills/` (Claude Code), and equivalents elsewhere.
 ## Use
 
 ```
-tutor I want to learn python
+tutor I want to become an AI engineer
 tutor quiz me on SQL joins
 tutor I forgot where I was with Rust
 ```
@@ -87,14 +87,14 @@ skill says so instead of pretending.
 Everything is plain markdown you can read, edit, and diff:
 
 ```
-~/tutor/python/
+~/tutor/ai-engineer/
   TOPIC.md          # mission, outline, learner profile
   LEDGER.md         # per-concept rung and verdict — read before every question
   sources/          # only if you have material to ground in
   sessions/
     2026-10-07.md   # append-only history
   artifacts/
-    control-flow-r4.html
+    attention-r4.html
 ```
 
 ## Design

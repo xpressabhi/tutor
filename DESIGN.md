@@ -27,13 +27,13 @@ conversation) and different failure modes.
 Topic-scoped, one directory per subject: `~/tutor/<topic-slug>/`.
 
 ```
-~/tutor/python/
+~/tutor/ai-engineer/
   TOPIC.md          # subject, goal, running outline, learner profile
   LEDGER.md         # per-concept state — read on every question
   sessions/
     2026-10-07.md   # append-only: question, answer, verdict, teaching
   artifacts/
-    control-flow-r4.html
+    attention-r4.html
 ```
 
 Plain markdown. Everything the tutor needs is readable with `cat`, editable by
@@ -45,9 +45,9 @@ Small file, read before every question. One row per concept.
 
 | concept | rung | last verdict | attempts | shaky | notes |
 |---|---|---|---|---|---|
-| list vs tuple | 2 | correct | 1 | no | |
-| list comprehension | 3 | partial | 2 | yes | forgets the `if` clause |
-| generators | 4 | — | 0 | — | queued after decorators |
+| embeddings | 2 | correct | 1 | no | |
+| attention | 3 | partial | 2 | yes | forgets the 1/sqrt(d_k) scaling |
+| fine-tuning | 4 | — | 0 | — | queued after attention |
 
 `rung` is 1–5, calibrated **against the learner**, not the subject. What counts as
 rung 3 differs per domain and per person: for one Python learner it is "apply it in
@@ -168,7 +168,7 @@ state machine, a worked example, anatomy — gets one self-contained HTML file i
 - **Earned.** Most concepts are better as a question and a paragraph. Artifacts are
   for shapes prose cannot carry.
 
-Filenames carry the rung (`control-flow-r4.html`) so a later session can regenerate
+Filenames carry the rung (`attention-r4.html`) so a later session can regenerate
 the same concept at a different rung.
 
 ## Source grounding

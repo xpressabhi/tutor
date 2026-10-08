@@ -181,12 +181,12 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
           <span class="mono">session 2026-10-08</span>
           <span class="mono">rung 3</span>
         </header>
-        <p class="log-meta mono">concept: list comprehensions</p>
+        <p class="log-meta mono">concept: tokenization</p>
         <div class="log-body">
-          <p class="qa"><span class="mark mono">Q</span>Why doesn't <code>[x for x in xs if p(x)]</code> stop after the first match?</p>
-          <p class="qa ans"><span class="mark mono">A</span>&ldquo;It builds the whole list eagerly, I think. So every item still gets filtered.&rdquo;</p>
+          <p class="qa"><span class="mark mono">Q</span>Why can a model spell <code>strawberry</code> perfectly and still miscount the <code>r</code>'s in it?</p>
+          <p class="qa ans"><span class="mark mono">A</span>&ldquo;It works on tokens, not letters, I think. So the spelling is not directly visible to it.&rdquo;</p>
           <p class="verdict"><span class="stamp mono">partial</span>right idea, hedged. Rung holds; fresh framing next.</p>
-          <p class="qa next"><span class="mark mono">Next</span>For <code>xs</code> of length 10, how many times does <code>p(x)</code> run?</p>
+          <p class="qa next"><span class="mark mono">Next</span>If tokens hide the letters, what does counting one actually require of the model?</p>
         </div>
       </article>
       <p class="log-caption mono">appended to sessions/2026-10-08.md</p>
@@ -243,14 +243,14 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
   <section class="files wrap" aria-labelledby="files-title">
     <h2 id="files-title">State is just files</h2>
     <p class="section-lede">Everything lives in plain markdown under <code>~/tutor/&lt;topic&gt;/</code>. Read it, edit it, diff it, or keep it in git.</p>
-<pre class="tree"><span class="d">~/tutor/python/</span>
+<pre class="tree"><span class="d">~/tutor/ai-engineer/</span>
   TOPIC.md               <span class="c">mission, outline, how you learn</span>
   LEDGER.md              <span class="c">one row per concept: rung, verdict, shaky</span>
   sessions/
     2026-10-08.md        <span class="c">question, answer, verdict, teaching</span>
   sources/               <span class="c">only when you have material to ground in</span>
   artifacts/
-    control-flow-r4.html <span class="c">drawn at the learner's rung</span>
+    attention-r4.html    <span class="c">drawn at the learner's rung</span>
 </pre>
   </section>
 
