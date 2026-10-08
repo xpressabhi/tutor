@@ -89,8 +89,14 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 .log-caption{font-size:.74rem;color:var(--ink-3);letter-spacing:.02em;text-align:right}
 
 /* sections */
-.loop,.does,.files,.works{border-top:1px solid var(--rule);padding-block:clamp(3rem,7vh,4.5rem)}
+.loop,.use,.does,.files,.works{border-top:1px solid var(--rule);padding-block:clamp(3rem,7vh,4.5rem)}
 .section-lede{margin-top:.9rem;font-size:1.02rem;color:var(--ink-2);max-width:62ch}
+
+/* ask examples */
+.starters{list-style:none;margin:2.25rem 0 0;padding:0}
+.starters li{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:.3rem 2.5rem;padding:.85rem 0;align-items:baseline}
+.starters .say{font-family:var(--mono);font-size:.95rem;color:var(--ink)}
+.starters .note{font-size:.92rem;line-height:1.55;color:var(--ink-2)}
 
 /* loop steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.75rem;list-style:none;margin:2.25rem 0 0;padding:0}
@@ -132,6 +138,7 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;align-items:start;gap:2.5rem}
+  .starters li{grid-template-columns:1fr;gap:.3rem}
 }
 @media (max-width:760px){
   .steps{grid-template-columns:1fr 1fr}
@@ -191,6 +198,24 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
       </article>
       <p class="log-caption mono">appended to sessions/2026-10-08.md</p>
     </aside>
+  </section>
+
+  <section class="use wrap" aria-labelledby="use-title">
+    <h2 id="use-title">Just ask</h2>
+    <p class="section-lede">Plain language, no syntax. Openers from first session to deep end:</p>
+    <ul class="starters">
+      <li><code class="say">tutor I want to become an AI engineer</code><span class="note">New topic. Mission first, then a short calibration.</span></li>
+      <li><code class="say">tutor quiz me on SQL joins</code><span class="note">A focused assessment: questions climb until they find your ceiling.</span></li>
+      <li><code class="say">tutor I forgot where I was with Rust</code><span class="note">Reads the ledger, then probes. Old levels are claims, not evidence.</span></li>
+      <li><code class="say">tutor resume AI engineering</code><span class="note">Restart any previous session without losing anything: the ledger, logs, and notes are all on disk.</span></li>
+      <li><code class="say">tutor I have a system design interview on Friday</code><span class="note">The date sets the mission. Every question aims at the interview.</span></li>
+      <li><code class="say">tutor quiz me on this codebase</code><span class="note">Reads the actual code and asks about what it really does.</span></li>
+      <li><code class="say">tutor what does this snippet print?</code><span class="note">Runs it first. The answer comes from output it actually saw.</span></li>
+      <li><code class="say">tutor teach me medieval history, purely for pleasure</code><span class="note">Non-technical subjects run on the same loop.</span></li>
+      <li><code class="say">tutor let me explain RAG to you, poke holes</code><span class="note">Explain-back: you talk, it finds the gaps in the explanation.</span></li>
+      <li><code class="say">tutor teach me TCP states, draw the machine</code><span class="note">Ideas that need to be seen get a small diagram, at your level.</span></li>
+      <li><code class="say">tutor I've got 20 minutes before standup</code><span class="note">Short bursts count. The ledger holds the thread between sessions.</span></li>
+    </ul>
   </section>
 
   <section class="loop wrap" aria-labelledby="loop-title">
