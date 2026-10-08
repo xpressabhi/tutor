@@ -173,36 +173,31 @@ the same concept at a different rung.
 
 ## Source grounding
 
-Added after reading [bevibing/tutor-skills](https://github.com/bevibing/tutor-skills)
-— a sibling skill with a different architecture, not a fork of this one.
-
 The hole it fills: this skill's knowledge otherwise comes from the model, so a
 factually wrong claim is indistinguishable from a right one. Code execution
 closes that gap for claims *about code* — you run it, so you know. It does
 nothing for claims about the world.
 
-The borrowed idea is generation: when the learner has material, read it and write
-per-concept notes carrying where each fact came from. Then a question can name its
-source, and an ungrounded question can be labelled as such. Two claims with the
-same confidence level stop looking identical, which is the whole point.
+When the learner has material, the tutor reads it and writes per-concept notes
+carrying where each fact came from. Then a question can name its source, and an
+ungrounded question can be labelled as such. Two claims with the same confidence
+level stop looking identical, which is the whole point.
 
-What was not taken:
+Deliberately not included:
 
-- **Obsidian.** A viewer, not a mechanism — and Obsidian opens any folder as a
-  vault, so `~/tutor/<topic>/` is browsable that way with zero skill changes and no
-  dependency. The learning happens in the dialogue; the notes are the residue.
-- **The 9-phase vault pipeline.** This skill is one loop. A generator feeding a
-  quizzer is a different shape, and adopting the phases would add a second skill and
-  a second failure mode for no gain in the loop itself.
-- **Their proficiency model.** Percentage-of-correct over batches of four MCQ. It
-  cannot see whether an answer was reasoned or guessed, so the ratchet guard and
-  regression detection both become unavailable. A one-question loop can.
-
-Their batch cadence is the deeper difference: four questions land before any
-adaptation happens, so within a round the tutor cannot respond to the learner. That
-is why the two skills are complementary rather than competing — theirs is strong
-for working through a vault of your own documents, this one for a subject learned
-over time.
+- **Obsidian integration.** A viewer, not a mechanism — and Obsidian opens any
+  folder as a vault, so `~/tutor/<topic>/` is browsable that way with zero skill
+  changes and no dependency. The learning happens in the dialogue; the notes are
+  the residue.
+- **A separate vault-generation pipeline.** Source notes are written in one pass
+  for the concepts the material actually covers. Structured generation as its own
+  phase would add a second skill and a second failure mode for no gain in the
+  loop itself.
+- **Percentage-of-correct scoring over batches of questions.** It cannot see
+  whether an answer was reasoned or guessed, so the ratchet guard and regression
+  detection both become unavailable. A one-question loop can, and it keeps
+  adaptation inside the round — the next question is chosen after the answer
+  arrives, not before.
 
 ## Tailoring
 

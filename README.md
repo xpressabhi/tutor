@@ -24,6 +24,15 @@ the learner left off and probes whether the recorded level still holds.
 ## Install
 
 ```sh
+npx skills add xpressabhi/tutor
+```
+
+The [`skills` CLI](https://github.com/vercel-labs/skills) installs to whichever
+agents it detects — OpenCode, Claude Code, Cursor, Codex, and more.
+
+Or clone it yourself:
+
+```sh
 git clone https://github.com/xpressabhi/tutor.git ~/.agents/skills/tutor
 ```
 
@@ -34,8 +43,8 @@ git clone https://github.com/xpressabhi/tutor.git ~/Documents/GitHub/tutor
 ln -s ~/Documents/GitHub/tutor ~/.agents/skills/tutor
 ```
 
-Works in `~/.agents/skills/` (OpenCode, universal), `~/.claude/skills/`
-(Claude Code), and equivalents elsewhere.
+Manual installs work in `~/.agents/skills/` (OpenCode and other universal
+readers), `~/.claude/skills/` (Claude Code), and equivalents elsewhere.
 
 ## Use
 
@@ -91,9 +100,9 @@ Everything is plain markdown you can read, edit, and diff:
 ## Design
 
 `DESIGN.md` covers the reasoning: why verdicts read the *how*, why the rung
-ratchet is guarded, why no learning-style taxonomy, and what was borrowed from
-[bevibing/tutor-skills](https://github.com/bevibing/tutor-skills) (source grounding
-— not Obsidian, not the vault pipeline). `FORMATS.md` has the file templates.
+ratchet is guarded, why no learning-style taxonomy, and how source grounding
+turns your own material into per-concept question sources. `FORMATS.md` has the
+file templates.
 
 Deliberate omissions:
 
