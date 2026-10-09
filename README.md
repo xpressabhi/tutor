@@ -64,6 +64,7 @@ Slugify the topic and the skill creates `~/tutor/<topic>/` on first use.
 | **Adapts** | Rung goes up on a correct answer, holds on partial, drops on a miss. Every answer read for reasoning, not just result |
 | **Re-teaches** | A miss gets an explanation of the idea underneath, then an immediate re-ask in a fresh framing |
 | **Resumes** | Every session starts by reading the ledger, then *probing* it — a three-week-old level is a claim, not evidence |
+| **Listens** | Explain-back: they explain it, you find the gap in what they left out |
 | **Steers** | Tangents are followed, then re-anchored. Wandering isn't being behind |
 | **Runs code** | Verifies the learner's snippets against real output; builds questions whose answers were actually observed |
 | **Draws** | Emits level-tagged HTML artifacts for concepts that need to be seen, at the learner's rung, not the maximal version |
@@ -87,14 +88,16 @@ skill says so instead of pretending.
 Everything is plain markdown you can read, edit, and diff:
 
 ```
-~/tutor/ai-engineer/
-  TOPIC.md          # mission, outline, learner profile
-  LEDGER.md         # per-concept rung and verdict — read before every question
-  sources/          # only if you have material to ground in
-  sessions/
-    2026-10-07.md   # append-only history
-  artifacts/
-    attention-r4.html
+~/tutor/
+  LEARNER.md          # cross-topic profile — shared by every topic
+  ai-engineer/
+    TOPIC.md          # mission, outline, learner profile
+    LEDGER.md         # per-concept rung and verdict — read before every question
+    sources/          # only if you have material to ground in
+    sessions/
+      2026-10-07.md   # append-only history
+    artifacts/
+      attention-r4.html
 ```
 
 ## Design
@@ -113,8 +116,9 @@ Deliberate omissions:
 ## Layout
 
 ```
-SKILL.md        # the skill
-FORMATS.md      # file templates and fields
-DESIGN.md       # rationale and scope decisions
-scripts/run.sh  # sandboxed snippet runner (timeout, temp cleanup, no network)
+SKILL.md          # the skill
+FORMATS.md        # file templates and fields
+DESIGN.md         # rationale and scope decisions
+scripts/run.sh    # sandboxed snippet runner (timeout, temp cleanup, no network)
+scripts/test-run.sh   # smoke test for the runner — bash scripts/test-run.sh
 ```
