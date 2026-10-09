@@ -43,10 +43,12 @@ out="$(mktemp -t tutor_out.XXXXXX)"
 err="$(mktemp -t tutor_err.XXXXXX)"
 trap 'rm -f "$snippet" "$out" "$err"' EXIT
 
-# Some interpreters pick behaviour from the filename extension.
+# Some interpreters pick behaviour from the filename extension. Move rather than
+# repoint the variable — the original mktemp file has to go with it, or the EXIT
+# trap below only ever sees the renamed path and the original leaks.
 case "$interpreter" in
-  *python*) snippet="$snippet.py" ;;
-  *node*)   snippet="$snippet.js" ;;
+  *python*) mv "$snippet" "$snippet.py"; snippet="$snippet.py" ;;
+  *node*)   mv "$snippet" "$snippet.js"; snippet="$snippet.js" ;;
 esac
 cat >"$snippet" 2>/dev/null || true
 
