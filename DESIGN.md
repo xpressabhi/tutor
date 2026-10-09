@@ -43,8 +43,8 @@ hand, and diffable in git if the user wants that.
 
 Small file, read before every question. One row per concept.
 
-| concept | rung | last verdict | attempts | shaky | notes |
-|---|---|---|---|---|---|
+| concept | rung | last verdict | attempts | shaky | next probe | notes |
+|---|---|---|---|---|---|---|
 | embeddings | 2 | correct | 1 | no | |
 | attention | 3 | partial | 2 | yes | forgets the 1/sqrt(d_k) scaling |
 | fine-tuning | 4 | — | 0 | — | queued after attention |
@@ -289,6 +289,57 @@ If the steering turned out to be the better use of the session — the thing the
 actually care about is a prerequisite for the concept on the ledger — the ledger is
 reordered to put it first. The mission is theirs; chasing their curiosity is how
 motivation stays intact. Record the reordering in the log.
+
+## Session close
+
+Resume is only as good as what the previous session left findable. The turns
+themselves are a poor record of what was unfinished: an in-flight question is
+visible in the tail of the log, but a question that was *never asked* leaves no
+trace at all — and it is the one the next session most needs. So every sitting
+ends with a short close: what got covered and at what rung, what was in flight,
+what never got asked, and the openers for next time. Three lines of structure,
+against a next session inferring all of it from a log it has no memory of
+writing.
+
+The ledger's `Next probe` column exists for the same reason. The ratchet guard
+owes a clean re-probe before a rung rises, and that debt is real state: put it
+in prose in a session log and a clean context either misses it or re-derives it
+badly. One column, read with the row, before every question.
+
+## One row per concept
+
+Concepts return — a thread closed on Tuesday is re-probed two weeks later. A
+ledger that lets a returning concept get a fresh row drifts into two rows for
+one thing (one at rung 2 partial, one at rung 2 correct), and whichever the next
+session opens on becomes the level. Rows are edited in place, never duplicated,
+and the row order is stable, so a `git diff` on the ledger across sessions stays
+readable.
+
+## Topic resolution
+
+Slugs are written from the learner's phrasing, and phrasing does not survive:
+"AI engineering" interviews lived in `~/tutor/typescript/`. Resolving a topic
+purely by slug either creates a second workspace for the same goal — splitting
+the ledger and losing the calibration — or silently opens the wrong one. So the
+directory is chosen by reading the mission line of what exists, and the aliases
+the learner actually uses are recorded on the `# Learning:` line for the next
+session to find.
+
+## LEARNER.md
+
+Learner-level truths — pace, hint-first, tolerance for struggle — are real and
+do not belong to a topic. A per-topic copy of them goes stale the moment a
+second topic starts, which is exactly when it would have been useful. One file
+above the topics, treated as a prior rather than a finding: a learner can be
+terse with code and slow with prose, so each topic confirms it against its own
+evidence and records the confirmation in its own `TOPIC.md`.
+
+## Explain-back
+
+The loop is normally "tutor asks, learner answers". Flipping it costs nothing —
+the learner explains, the tutor listens for what they left out — and it is often
+the sharper read, because the gaps live in the omissions rather than the
+mistakes. Verdicts and rungs are unchanged; only who holds the pen moves.
 
 ## Harness portability
 
