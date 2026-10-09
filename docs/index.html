@@ -236,7 +236,7 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
       </li>
       <li>
         <h3>record</h3>
-        <p>The ledger row and the session log, written before the next question.</p>
+        <p>The ledger row — including the re-probe it owes — and the session log, written before the next question.</p>
       </li>
     </ol>
     <div class="ladder-block">
@@ -258,6 +258,7 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
       <div class="pair"><dt>adapts</dt><dd>Right answer, clean reasoning: up. Guess, hedge, or miss: hold or drop.</dd></div>
       <div class="pair"><dt>re-teaches</dt><dd>A miss gets the idea underneath, then a fresh question at the same rung.</dd></div>
       <div class="pair"><dt>resumes</dt><dd>The ledger is read, then probed. A recorded level is a claim, not evidence.</dd></div>
+      <div class="pair"><dt>listens</dt><dd>Explain-back: you explain it, it finds the gap in what you left out.</dd></div>
       <div class="pair"><dt>steers</dt><dd>Tangents are followed, then re-anchored. Wandering is not being behind.</dd></div>
       <div class="pair"><dt>grounds</dt><dd>Questions from your docs, code, or book cite where each one came from.</dd></div>
       <div class="pair"><dt>runs code</dt><dd>Snippets are verified against real output; questions are built from observed results.</dd></div>
@@ -267,15 +268,17 @@ a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 
   <section class="files wrap" aria-labelledby="files-title">
     <h2 id="files-title">State is just files</h2>
-    <p class="section-lede">Everything lives in plain markdown under <code>~/tutor/&lt;topic&gt;/</code>. Read it, edit it, diff it, or keep it in git.</p>
-<pre class="tree"><span class="d">~/tutor/ai-engineer/</span>
-  TOPIC.md               <span class="c">mission, outline, how you learn</span>
-  LEDGER.md              <span class="c">one row per concept: rung, verdict, shaky</span>
-  sessions/
-    2026-10-08.md        <span class="c">question, answer, verdict, teaching</span>
-  sources/               <span class="c">only when you have material to ground in</span>
-  artifacts/
-    attention-r4.html    <span class="c">drawn at the learner's rung</span>
+    <p class="section-lede">Everything lives in plain markdown under <code>~/tutor/</code>. Read it, edit it, diff it, or keep it in git.</p>
+<pre class="tree"><span class="d">~/tutor/</span>
+  <span class="d">ai-engineer/</span>
+    TOPIC.md             <span class="c">mission, outline, how you learn</span>
+    LEDGER.md            <span class="c">one row per concept: rung, verdict, next probe</span>
+    sessions/
+      2026-10-08.md      <span class="c">every turn, plus the close: what's in flight</span>
+    sources/             <span class="c">only when you have material to ground in</span>
+    artifacts/
+      attention-r4.html  <span class="c">drawn at the learner's rung</span>
+  LEARNER.md             <span class="c">cross-topic: how you learn, carried over</span>
 </pre>
   </section>
 
